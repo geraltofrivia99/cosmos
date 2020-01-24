@@ -1,0 +1,1 @@
+export { Dayli as default } from './DayliPhoto';

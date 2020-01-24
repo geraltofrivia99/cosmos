@@ -8,10 +8,14 @@
     "@testing-library/user-event": "^7.2.1",
     "igdb-api-node": "^4.0.3",
     "lodash.debounce": "^4.0.8",
+    "mobx": "^5.15.2",
+    "mobx-react": "^6.1.4",
     "react": "0.0.0-experimental-f42431abe",
     "react-calendar": "^2.19.2",
     "react-dom": "0.0.0-experimental-f42431abe",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "react-slick": "^0.25.2",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,0 +1,1 @@
+export { DailyStore } from './dayli';

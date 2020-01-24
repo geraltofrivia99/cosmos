@@ -52,11 +52,13 @@ function App() {
   }
   return (
     <>
+      <ProfilePage resource={resource} />
       <Calendar
         onChange={onChangeDate}
         value={curDate}
+        className="calendar"
       />
-      <input onChange={onChange}/>
+      {/* <input onChange={onChange}/>
       <button
         disabled={isPending}
         onClick={() => {
@@ -72,8 +74,7 @@ function App() {
       >
         Next
       </button>
-      {isPending ? " Loading..." : null}
-      <ProfilePage resource={resource} />
+      {isPending ? " Loading..." : null} */}
     </>
   );
 }
@@ -84,11 +85,11 @@ function ProfilePage({ resource }) {
       fallback={<h1>Loading profile...</h1>}
     >
       <ProfileDetails resource={resource} />
-      <Suspense
+      {/* <Suspense
         fallback={<h1>Loading posts...</h1>}
       >
         <ProfileTimeline resource={resource} />
-      </Suspense>
+      </Suspense> */}
     </Suspense>
   );
 }
@@ -98,7 +99,15 @@ const ProfileDetails = React.memo(({ resource }) => {
   console.log(user);
   return (
     <>
-      {user.hdurl && <img className="image" src={user.hdurl} alt='dsadas'/>}
+      {user.url && <div className="image-wrapper">
+        <img
+          className="image"
+          src={user.url}
+          alt='dsadas'
+          onLoad={() => {console.log('onLoad')}}
+          onError={() => {console.log('onError')}}
+        />
+        </div>}
       {/* {countResult ? result.map(({ title, platform }, i) => (
         <div key={title + i}>
           <p>Title: {title}</p>
