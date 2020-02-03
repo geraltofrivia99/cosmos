@@ -1,26 +1,26 @@
-import React from 'react';
-import Slider from "react-slick";
+import React, { useState } from 'react';
+import Carousel from 'nuka-carousel';
+import { observer } from "mobx-react";
+
+import * as S from './styled';
 
 
-const settings = {
-
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  // initialSlide: 0
-};
-
-export const SliderComponent = React.memo(({ data }) => {
+export const SliderComponent = observer(({ data, cfg }) => {
+  console.log('render COMPONENT SLIDER')
+  const renderSlides = data => data.map((cur, i) => {
+    return <Slide key={i + cur.date} image={cur.url} />
+  })
   return (
-    <div style={{height: '200px', width: '500px'}}>
-      <Slider {...settings}>
-        {data.map((cur, i) => <Slide key={i + cur.date} image={cur.url} />)}
-      </Slider>
-    </div>
+    <S.SliderWrapper>
+      <Carousel {...cfg}>
+      {renderSlides(data)}
+      </Carousel>
+    </S.SliderWrapper>
   )
 });
 
 const Slide = React.memo(({image}) => (
+  <div>
     <img style={{height: '200px', width: '300px'}} src={image} alt="" />
+  </div>
 ));

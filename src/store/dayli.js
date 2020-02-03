@@ -32,14 +32,14 @@ export class DailyStore {
       fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${API_KEY}`)
         .then(resp => resp.json())
         .then((data) => this.addfullDaysData(data, i))
-        .then(() => console.log('', ))
     ))
-    console.log(this.fullDaysData);
   }
 
   addfullDaysData = (data, i) => {
-    this.fullDaysData.push(data)
-    this._array.push(data);
+    if (data.media_type === 'image') {
+      this.fullDaysData.push(data)
+      this._array.push(data);
+    }
   }
   
 }

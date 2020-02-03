@@ -10,12 +10,15 @@
     "lodash.debounce": "^4.0.8",
     "mobx": "^5.15.2",
     "mobx-react": "^6.1.4",
+    "nuka-carousel": "^4.6.1",
     "react": "0.0.0-experimental-f42431abe",
     "react-calendar": "^2.19.2",
     "react-dom": "0.0.0-experimental-f42431abe",
+    "react-image": "^2.2.2",
     "react-scripts": "3.3.0",
     "react-slick": "^0.25.2",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

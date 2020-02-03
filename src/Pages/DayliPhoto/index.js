@@ -1,23 +1,46 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from "mobx-react";
 import { SliderComponent } from '../../Components';
+import { CDImage } from '../../Components/CDImage';
+import * as S from './styled';
 
-export const Dayli = observer(({ dayliData }) => {
-  console.log('render', dayliData._array)
+const INITIALDAYS = 5;
+
+const settings = {
+  transitionMode: "scroll",
+  cellSpacing: 18,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  heightMode: "max",
+  cellAlign: "left",
+  slideIndex: 1,
+};
+
+export const Dayli = observer(({ dayliData: { fullDaysData, addPrevDays } }) => {
+  console.log('render');
+  const [slideIndex, setSlideIndex] = useState(0);
   useEffect(() => {
-    dayliData.addPrevDays(3);
+    addPrevDays(INITIALDAYS);
   },[])
-  const onClick = useCallback(() => {dayliData.addPrevDays(3)}, []);
-  const onClick2 = useCallback(() => {dayliData.fetchFunc(dayliData.daysData)}, []);
+  const beforeSlide = (prevSlide, nextSlide) => {
+    setSlideIndex(nextSlide)
+    if (nextSlide === fullDaysData.length - 3) {
+      console.log('po4ti last', fullDaysData.length, nextSlide)
+      addPrevDays(3)
+    }
+  }
+  const cfg = { ...settings, slideIndex, beforeSlide }
 
   return (
-      <div>
-        <button onClick={onClick}>click</button>
-        <button onClick={onClick2}>click2</button>
-        
-        {!!dayliData.fullDaysData.length && 
-        dayliData.fullDaysData.map((cur, i) => (<div key={cur.date + i}>{cur.date}</div>))}
-        {!!dayliData.fullDaysData.length && <SliderComponent data={dayliData.fullDaysData} />}
-      </div>
+      <S.DayliSection>
+       {!!fullDaysData.length && <CDImage image={fullDaysData[slideIndex].hdurl} />}
+        {!!fullDaysData.length &&
+          <S.SliderWrapper>
+            <SliderComponent
+              data={fullDaysData}
+              cfg={cfg} />
+          </S.SliderWrapper>
+        }
+      </S.DayliSection>
   )
 });
