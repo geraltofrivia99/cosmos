@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Img from 'react-image';
 
 export const ImageWrapper = styled.div`
@@ -14,4 +14,13 @@ export const ImageWrapper = styled.div`
 export const Image = styled.img`
     width: 100%;
     height: 100%;
+    opacity: ${({ opacity }) => opacity};
+    transition: opacity 1s ease-in-out;
+`;
+
+export const LoadingHd = styled.span`
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #ffffff;
 `;

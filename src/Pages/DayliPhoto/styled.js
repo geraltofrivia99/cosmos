@@ -12,8 +12,20 @@ export const SliderWrapper = styled.div`
 export const DayliSection = styled.section`
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: grid;
     grid-template-rows: 3fr 1fr;
     grid-template-columns: 100%;
+    overflow: hidden;
+`;
+
+export const Loading = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

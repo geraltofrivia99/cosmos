@@ -7,7 +7,9 @@ export class DailyStore {
   daysData = [];
   _offset = 0;
   _array = [];
+  loadedImages = new Map();
   fullDaysData = [];
+  renderSlides = [];
   constructor(props) {
       this._offset = 1;
   }
@@ -37,9 +39,37 @@ export class DailyStore {
 
   addfullDaysData = (data, i) => {
     if (data.media_type === 'image') {
-      this.fullDaysData.push(data)
+      this.fullDaysData.push(data);
       this._array.push(data);
+      // const img = new Image();
+      // img.src = data.hdurl;
+      // img.onload = () => {
+      //   this.setLoadedImage(true, data.date);
+      // }
+      // img.onError = () => {
+      //   data.isHdImageLoad = false;
+      //   this.setLoadedImage(false, i);
+      // }
     }
+  }
+
+  // setRenderSlides = (index) => {
+  //   // this.renderSlides = [this.fullDaysData[index]];
+  //   // if (this.fullDaysData[index - 1]) {
+  //   //   this.renderSlides.unshift(this.fullDaysData[index - 1]);
+  //   // }
+  //   // if (this.fullDaysData[index + 1]) {
+  //   //   this.renderSlides.push(this.fullDaysData[index + 1]);
+  //   // }
+  // }
+
+  setLoadedSlides = (i, value) => {
+    this.fullDaysData[i].isLoadUrl = value;
+  }
+
+  setLoadedImage = (isLoad, date) => {
+    this.loadedImages.set(date, isLoad);
+    // console.log(`IMAGE WAS LOAD:${isLoad}`,  this.loadedImages);
   }
   
 }
@@ -47,8 +77,13 @@ export class DailyStore {
 
 decorate(DailyStore, {
   // daysData: observable,
+  loadedImages: observable,
   fullDaysData: observable,
+  renderSlides: observable,
   addPrevDays: action,
   fetchFunc: action,
-  addfullDaysData: action.bound
+  addfullDaysData: action.bound,
+  setLoadedImage: action.bound,
+  setLoadedSlides: action,
+  setRenderSlides: action,
 })
