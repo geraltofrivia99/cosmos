@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-// import Carousel from 'nuka-carousel';
-import Carousel from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css';
+import Carousel from 'nuka-carousel';
 import { observer } from "mobx-react";
 
 
@@ -24,10 +22,7 @@ export const SliderComponent = observer(({ data, cfg, setLoadedSlides }) => {
   })
   return (
     <S.SliderWrapper>
-      <Carousel
-        clickToChange
-        slidesPerPage={2}
-        centered>
+      <Carousel {...cfg}>
       {renderSlides(data)}
       </Carousel>
     </S.SliderWrapper>
@@ -36,7 +31,7 @@ export const SliderComponent = observer(({ data, cfg, setLoadedSlides }) => {
 
 const Slide = React.memo(({data, setLoaded, activeIndex, index}) => {
   return (
-    <S.Slide>
+    <S.Slide style={{ display: setDisplay(activeIndex, index) ? 'block' : 'none' }}>
       <S.Image
         src={data.url}
         alt=""
@@ -46,10 +41,10 @@ const Slide = React.memo(({data, setLoaded, activeIndex, index}) => {
   )
 });
 
-// function setDisplay(activeIndex, index) {
-//   if (activeIndex === index || activeIndex === index + 1 || activeIndex === index - 1
-//     || activeIndex === index + 2 || activeIndex === index - 2) {
-//     return true;
-//   }
-//   return false;
-// }
+function setDisplay(activeIndex, index) {
+  if (activeIndex === index || activeIndex === index + 1 || activeIndex === index - 1
+    || activeIndex === index + 2 || activeIndex === index - 2) {
+    return true;
+  }
+  return false;
+}

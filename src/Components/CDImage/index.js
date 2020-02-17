@@ -3,6 +3,7 @@ import * as S from './styled';
 import { observer } from "mobx-react";
 
 import { DotsLoader } from '../DotsLoader';
+import { FetchImageButton } from '../Buttons';
 
 export const CDImage = observer(({
     defaultImage,
@@ -17,6 +18,7 @@ export const CDImage = observer(({
     }, []);
     return (
         <S.ImageWrapper>
+            
             <S.Image
                 opacity={opacity}
                 src={isHdImageLoad ? hdImage : defaultImage}
@@ -26,7 +28,8 @@ export const CDImage = observer(({
             />
             {!isHdImageLoad && opacity &&
                 <S.LoadingHd>
-                    <DotsLoader><span></span></DotsLoader>
+                    <FetchImageButton />
+                    {/* <DotsLoader><span></span></DotsLoader> */}
                 </S.LoadingHd>}
         </S.ImageWrapper>
     )

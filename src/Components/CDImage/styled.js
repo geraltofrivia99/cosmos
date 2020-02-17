@@ -23,4 +23,6 @@ export const LoadingHd = styled.span`
     top: 20px;
     right: 20px;
     color: #ffffff;
+    display: flex;
+    flex-direction: row;
 `;

@@ -53,16 +53,6 @@ export class DailyStore {
     }
   }
 
-  // setRenderSlides = (index) => {
-  //   // this.renderSlides = [this.fullDaysData[index]];
-  //   // if (this.fullDaysData[index - 1]) {
-  //   //   this.renderSlides.unshift(this.fullDaysData[index - 1]);
-  //   // }
-  //   // if (this.fullDaysData[index + 1]) {
-  //   //   this.renderSlides.push(this.fullDaysData[index + 1]);
-  //   // }
-  // }
-
   setLoadedSlides = (i, value) => {
     this.fullDaysData[i].isLoadUrl = value;
   }

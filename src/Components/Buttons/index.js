@@ -1,0 +1,1 @@
+export { FetchImageButton } from './FetchImageBtn';

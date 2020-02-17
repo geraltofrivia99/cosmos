@@ -1,33 +1,18 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { observer } from "mobx-react";
-import { SliderComponent } from '../../Components';
-import { CDImage } from '../../Components/CDImage';
+import { SliderComponent, CDImage, CDImageData } from '../../Components';
 import * as S from './styled';
 
 const INITIALDAYS = 5;
 
-// const settings = {
-//   transitionMode: "scroll",
-//   cellSpacing: 2,
-//   slidesToShow: 1.25,
-//   slidesToScroll: 1,
-//   heightMode: "first",
-//   cellAlign: "center",
-//   slideIndex: 1,
-//   width: '100%',
-//   slideWidth: 1,
-//   wrapAround: true,
-// };
-
 const settings = {
-  className: "center",
-  centerMode: true,
-  infinite: true,
-  centerPadding: "60px",
-  slidesToShow: 3,
-  speed: 500
+  transitionMode: "scroll",
+  cellSpacing: 2,
+  slidesToShow: 1.25,
+  slidesToScroll: 1,
+  heightMode: "first",
+  // cellAlign: "center",
 };
-
 
 export const Dayli = observer(({ dayliData:
   { fullDaysData, addPrevDays, loadedImages, setLoadedSlides }
@@ -44,19 +29,19 @@ export const Dayli = observer(({ dayliData:
     // setSlideIndex(next);
   }
   const afterSlide = (nextSlide) => {
-    // setSlideIndex(nextSlide);
+    setSlideIndex(nextSlide);
     if (nextSlide === fullDaysData.length - 3) {
       // console.log('po4ti last', fullDaysData.length, nextSlide)
       addPrevDays(3);
     }
     
   }
-  const cfg = { ...settings, afterSlide, beforeSlide }
+  const cfg = { ...settings, afterSlide, beforeSlide, slideIndex }
   const curentSlideData = fullDaysData[slideIndex];
   const isCurentHdImageLoad = curentSlideData && loadedImages.get(curentSlideData.date);
-  const renderSlides = fullDaysData.filter(
-    (cur, i) => i === slideIndex - 1 || i === slideIndex || i === slideIndex + 1
-  );
+  // const renderSlides = fullDaysData.filter(
+  //   (cur, i) => i === slideIndex - 1 || i === slideIndex || i === slideIndex + 1
+  // );
   
   return (
       <S.DayliSection>
@@ -71,6 +56,11 @@ export const Dayli = observer(({ dayliData:
        }
         {fullDaysData.length >= 3 &&
           <S.SliderWrapper>
+            <CDImageData
+              title={curentSlideData.title}
+              date={curentSlideData.date}
+              exp={curentSlideData.explanation}
+            />
             <SliderComponent
               data={fullDaysData}
               cfg={cfg}
