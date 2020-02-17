@@ -7,7 +7,6 @@ export const ImageWrapper = styled.div`
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: -1;
     background-color: #1f1f1f;
 `;
 
@@ -25,4 +24,5 @@ export const LoadingHd = styled.span`
     color: #ffffff;
     display: flex;
     flex-direction: row;
+    z-index: 10;
 `;
