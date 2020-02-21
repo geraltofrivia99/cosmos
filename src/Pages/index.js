@@ -1,1 +1,2 @@
-export { Dayli as default } from './DayliPhoto';
+export { Dayli } from './DayliPhoto';
+export { MarsTemp } from './MarsTemp';

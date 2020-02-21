@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from "mobx-react";
 import { SliderComponent, CDImage, CDImageData } from '../../Components';
 import * as S from './styled';
