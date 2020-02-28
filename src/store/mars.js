@@ -1,7 +1,5 @@
 import { observable, computed, decorate, action } from 'mobx';
-
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
+import { getParsedDate } from '../utils';
 
 export class MarsStore {
   solKeys = [];
@@ -18,11 +16,7 @@ export class MarsStore {
       this.currentSollSetter(resp.sol_keys);
       const featuredSol = resp.sol_keys[resp.sol_keys.length - 1];
       const featuredSolObject = resp[featuredSol];
-      const earthDate = featuredSolObject.First_UTC;
-      const date = new Date(earthDate);
-      const earthMonth = months[date.getUTCMonth()];
-      const earthDay = date.getUTCDate();
-      this.currentDateSetter(earthMonth + ' ' + earthDay);
+      this.currentDateSetter(getParsedDate(featuredSolObject.First_UTC));
       console.log(resp);
     } catch (err) {
       console.log(err);
@@ -49,6 +43,7 @@ export class MarsStore {
 
 decorate(MarsStore, {
   allData: observable,
+  solKeys: observable,
   curentSoll: observable,
   currentDate: observable,
   currentDateSetter: action,
