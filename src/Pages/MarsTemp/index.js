@@ -9,23 +9,43 @@ function renderSolsCards(solKeys, allData) {
   if (solKeys.length === 0) {
     return;
   }
-  console.log('sols render')
   return solKeys.map((cur) => {
     const { mn, mx } = allData[cur].AT;
     return (
-      <SolCard key={cur} sol={cur} min={mn} max={mx} date={getParsedDate(allData[cur].First_UTC, 'short')}/>
+      <SolCard key={cur} sol={cur} min={Math.ceil(mn)} max={Math.ceil(mx)} date={getParsedDate(allData[cur].First_UTC, 'short')}/>
     )
   })
 }
 
+function renderCurrentSol(currentSol, currentDate, allData) {
+  return (
+    <S.CurrentData>
+      <S.CurrentDate>
+        <S.CurrentSoll>{!!currentSol && 'Sol ' + currentSol}</S.CurrentSoll>
+        <S.CurentDay>{!!currentDate && currentDate}</S.CurentDay>
+      </S.CurrentDate>
+      <S.CurentTemp>
+        <S.CurentMaxTemp>
+          {!!currentSol &&  'Hight: ' + Math.ceil(allData[currentSol].AT.mx) + '°'}
+        </S.CurentMaxTemp>
+        <S.CurentMinTemp>
+          {!!currentSol &&  'Low: ' + Math.ceil(allData[currentSol].AT.mn) + '°'}
+        </S.CurentMinTemp>
+      </S.CurentTemp>
+    </S.CurrentData>
+  )
+}
+
 export const MarsTemp = observer(({ marsData: { fetchData, currentSol, currentDate, allData, solKeys } }) => {
   const [imageVisible, setImageVisible] = useState(false);
-  console.log('render', currentSol, currentDate)
+  console.log('render MARS', currentSol, currentDate);
   useEffect(() => {
     loadImage(setImageVisible);
     fetchData();
   }, []);
   const memoizedSolCards = useMemo(() => renderSolsCards(solKeys, allData), [solKeys]);
+  const memoizedCurrentSol = useMemo(() =>
+    renderCurrentSol(currentSol, currentDate, allData), [currentSol]);
   return (
     <S.Wrapper>
       <S.BgImageWrapper>
@@ -51,20 +71,7 @@ export const MarsTemp = observer(({ marsData: { fetchData, currentSol, currentDa
              on the surface of Mars at Elysium Planitia, a flat, smooth plain near Mars’ equator.
           </h5>
         </S.Description>
-        <S.CurrentData>
-          <S.CurrentDate>
-            <S.CurrentSoll>{!!currentSol && 'Sol ' + currentSol}</S.CurrentSoll>
-            <S.CurentDay>{!!currentDate && currentDate}</S.CurentDay>
-          </S.CurrentDate>
-          <S.CurentTemp>
-            <S.CurentMaxTemp>
-              {!!currentSol &&  'Hight: ' + allData[currentSol].AT.mx + '°'}
-            </S.CurentMaxTemp>
-            <S.CurentMinTemp>
-              {!!currentSol &&  'Low: ' + allData[currentSol].AT.mn + '°'}
-            </S.CurentMinTemp>
-          </S.CurentTemp>
-        </S.CurrentData>
+        {currentSol && allData[currentSol] && memoizedCurrentSol}
         <S.SolCardsWrapper>
           {solKeys && memoizedSolCards}
         </S.SolCardsWrapper>

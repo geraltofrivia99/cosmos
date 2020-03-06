@@ -12,7 +12,7 @@ const anim1 = keyframes`
 export const Descriptions = styled.div`
   font-family: 'Inconsolata', monospace;
   color: #f3f3f3;
-  clip-path: inset(0% 0% 0% 100%);
+  /* clip-path: inset(0% 0% 0% 100%); */
   /* transition: clip-path 0.5s ease-in-out; */
   /* max-height: 185px; */
 
@@ -28,12 +28,12 @@ export const Wrapper = styled.div`
   display: flex;
   align-self: flex-end;
   min-width: 200px;
-  &:hover ${Descriptions} {
+  /* &:hover ${Descriptions} {
     animation-name: ${anim1};
     animation-direction: forward;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
-  }
+  } */
 `;
 
 export const Title = styled.div`

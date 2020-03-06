@@ -30,6 +30,7 @@ export const Wrapper = styled.section`
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  position: relative;
   /* background: url('https://mars-jpl-nasa-gov.s3.amazonaws.com/src/insight/insight_weather_bg.jpg') no-repeat top center;
   background-size: cover; */
 `;
@@ -76,17 +77,17 @@ export const Title = styled.div`
   color: #f3f3f3;
   & h1 {
     overflow: hidden; /* Ensures the content is not revealed until the animation */
-    border-right: .15em solid orange; /* The typwriter cursor */
+    /* border-right: .15em solid orange; */
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: .15em; /* Adjust as needed */
     -webkit-text-stroke: 1px white;
     -webkit-text-fill-color: transparent;
     font-family: 'Bowlby One SC', sans-serif;
-    animation: 
+    /* animation: 
     ${typing} 3.5s steps(30, end),
     ${blinkCaret} .5s step-end 7,
-    ${borderfadeOut} .1s linear 3.6s forwards;
+    ${borderfadeOut} .1s linear 3.6s forwards; */
   }
 `;
 
@@ -99,7 +100,7 @@ export const SubTitle = styled.div`
       margin: .2em 0;
       color: #f5f5f5;
       opacity: 0;
-      animation: ${fadeIn} .3s ease-in-out 3.6s forwards;
+      animation: ${fadeIn} .3s ease-in-out 1s forwards;
     }
 `;
 
@@ -112,7 +113,7 @@ export const Description = styled.div`
     margin: .2em 0;
     color: #f5f5f5;
     opacity: 0;
-    animation: ${fadeIn} .3s ease-in-out 3.6s forwards;
+    animation: ${fadeIn} .3s ease-in-out 1s forwards;
   }
 `;
 
@@ -122,7 +123,7 @@ export const CurrentData = styled.div`
   font-size: 1.5em;
   color: #f3f3f3;
   opacity: 0;
-  animation: ${fadeIn} .3s ease-in-out 3.6s forwards;
+  animation: ${fadeIn} .3s ease-in-out 1s forwards;
 `;
 
 export const CurrentDate = styled.div`
@@ -134,7 +135,7 @@ export const CurrentDate = styled.div`
   font-size: 1.5em;
   color: #f3f3f3;
   opacity: 0;
-  animation: ${fadeIn} .3s ease-in-out 3.6s forwards;
+  animation: ${fadeIn} .3s ease-in-out 1s forwards;
 `;
 
 export const CurrentSoll = styled.div`
@@ -159,7 +160,7 @@ export const CurentTemp = styled.div`
   opacity: 0;
   font-size: 1.5em;
   font-family: 'Amatic SC', monospace;
-  animation: ${fadeIn} .3s ease-in-out 3.6s forwards;
+  animation: ${fadeIn} .3s ease-in-out 1s forwards;
 `;
 
 export const CurentMaxTemp = styled.div`

@@ -1,147 +1,64 @@
-import React, {
-  useState,
-  useTransition,
-  Suspense,
-  useEffect
-} from "react";
-// import debounce from 'lodash.debounce';
-import { fetchProfileData } from "./fakeApi";
-import Calendar from 'react-calendar';
+import React, { useEffect, useMemo, Suspense } from 'react';
+import { Dayli, MarsTemp } from './Pages';
+import { observer } from "mobx-react";
+import { DailyStore, MarsStore } from './store';
+import { scrollToY, delay } from './utils';
+import * as S from './styled';
 
-function getNextId(id) {
-  return id === 3 ? 0 : id + 1;
-}
+const dayliStore = new DailyStore();
+const marsStore = new MarsStore();
 
-const d = new Date();
-const initialResource = fetchProfileData(0, new Date(d.getTime() - (d.getTimezoneOffset() * 60000 )).toISOString().split("T")[0]);
-
-
-
-function App() {
-  const [resource, setResource] = useState(
-    initialResource
-  );
-  const [curDate, setCurDate] = useState(new Date());
-  const [
-    startTransition,
-    isPending
-  ] = useTransition({
-    timeoutMs: 3000
-  });
-  const onChange = (e) => {
-    const value = e.target.value;
-    // debounce(() => {
-      startTransition(() => {
-        console.log('fetch--------')
-        setResource(
-          fetchProfileData(0, value)
-        );
-      });
-    // }, 300)
+export const App = observer(({ store }) => {
+  useEffect(() => {
+    store.marsYCoord = window.innerHeight;
+    const { y } = document.body.getBoundingClientRect()
+    store.currentPage = Math.abs(y) / window.innerHeight;
+  }, []);
+  const scrollToMars = () => {
+    store.setCurentPage(1);
+    if (store.marsWasMounted) {
+      scrollToY(store.marsYCoord);    
+    } else {
+      const d = delay(scrollToY, 300);
+      d(store.marsYCoord);
+    }
   }
-  const onChangeDate = (date) => {
-    console.log(date);
-    const formatedDay = new Date(date.getTime() - (date.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
-    setCurDate(date)
-    startTransition(() => {
-      console.log('fetch--------')
-      setResource(
-        fetchProfileData(0, formatedDay)
-      );
-    });
+  const scrollToDayli = () => {
+    store.setCurentPage(0);
+     if (store.dayliWasMounted) {
+      scrollToY(0);    
+    } else {
+      const d = delay(scrollToY, 300);
+      d(0);
+    }
   }
+  const renderMars = useMemo(() => () => {
+    if ((store.currentPage !== null && store.currentPage === 1) || store.marsWasMounted) {
+      if (!store.marsWasMounted) {
+        store.marsWasMounted = true;
+      }
+      return <MarsTemp id="mars" marsData={marsStore} />
+    }
+    return <S.FakeView className="fakeMars"/>
+  }, [store.currentPage])
+  const renderDayli = useMemo(() => () => {
+    if ((store.currentPage !== null && store.currentPage === 0) || store.dayliWasMounted) {
+      if (!store.dayliWasMounted) {
+        store.dayliWasMounted = true;
+      }
+      return  <Dayli dayliData={dayliStore} />
+    }
+    return <S.FakeView className="fakeDayli"/>
+  }, [store.currentPage])
   return (
     <>
-      <ProfilePage resource={resource} />
-      <Calendar
-        onChange={onChangeDate}
-        value={curDate}
-        className="calendar"
-      />
-      {/* <input onChange={onChange}/>
-      <button
-        disabled={isPending}
-        onClick={() => {
-          startTransition(() => {
-            const nextUserId = getNextId(
-              resource.userId
-            );
-            setResource(
-              fetchProfileData(nextUserId)
-            );
-          });
-        }}
-      >
-        Next
-      </button>
-      {isPending ? " Loading..." : null} */}
+      <S.ScrollControls>
+          <div onClick={scrollToDayli}><span /><p>Go to Dayli</p></div>
+          <div onClick={scrollToMars}><span /><p>Go to Mars</p></div>
+      </S.ScrollControls>
+      {renderDayli()}
+      {renderMars()}
+     }
     </>
-  );
-}
-
-function ProfilePage({ resource }) {
-  return (
-    <Suspense
-      fallback={<h1>Loading profile...</h1>}
-    >
-      <ProfileDetails resource={resource} />
-      {/* <Suspense
-        fallback={<h1>Loading posts...</h1>}
-      >
-        <ProfileTimeline resource={resource} />
-      </Suspense> */}
-    </Suspense>
-  );
-}
-
-const ProfileDetails = React.memo(({ resource }) => {
-  const user = resource.user.read();
-  console.log(user);
-  return (
-    <>
-      {user.url && <div className="image-wrapper">
-        <img
-          className="image"
-          src={user.url}
-          alt='dsadas'
-          onLoad={() => {console.log('onLoad')}}
-          onError={() => {console.log('onError')}}
-        />
-        </div>}
-      {/* {countResult ? result.map(({ title, platform }, i) => (
-        <div key={title + i}>
-          <p>Title: {title}</p>
-          <span>platform: {platform}</span>
-        </div>
-      )) : (<p>{result}</p>)} */}
-    </>
-  );
-});
-
-// function ProfileDetails({ resource }) {
-//   const array = resource.user.read();
-//   console.log(array)
-//   return (
-//     <>
-//       {array.result.map(({ title, platform }, i) => (
-//         <div key={title + i}>
-//           <p>Title: {title}</p>
-//           <span>platform: {platform}</span>
-//         </div>
-//       ))}
-//     </>
-//   );
-// }
-
-function ProfileTimeline({ resource }) {
-  const posts = resource.posts.read();
-  return (
-    <ul>
-      {posts.map(post => (
-        <li key={post.id}>{post.text}</li>
-      ))}
-    </ul>
-  );
-}
-
-export default App;
+  )
+})

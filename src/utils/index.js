@@ -11,3 +11,13 @@ export function getParsedDate(date, monthType) {
   const earthDay = d.getUTCDate();
   return earthMonth + ' ' + earthDay;
 }
+
+export function scrollToY(y) {
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+
+export function delay(f, ms) {
+  return function() {
+    setTimeout(() => f.apply(this, arguments), ms);
+  };
+}

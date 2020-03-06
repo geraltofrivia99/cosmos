@@ -8728,6 +8728,11 @@ react-scripts@3.3.0:
   optionalDependencies:
     fsevents "2.1.2"
 
+react-scroll-to@^3.0.0-beta.6:
+  version "3.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/react-scroll-to/-/react-scroll-to-3.0.0-beta.6.tgz#c7f6ff00247e1ee78659f04637a9993b1222735e"
+  integrity sha512-uAx77bPqqYL7UIga0d+tcVXHpVmBzmBUGuy1AaiRUgNC7InzE/4qNxg0d4cxhlCh8ok6zBCQ82LzzmTcYIte/w==
+
 react-slick@^0.25.2:
   version "0.25.2"
   resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.25.2.tgz#56331b67d47d8bcfe2dceb6acab1c8fd5bd1f6bc"
