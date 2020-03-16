@@ -15,6 +15,10 @@ export const SliderWrapper = styled.div`
 // ------------------- Slide ------------------
 
 export const Slide = styled.div`
+    background-color: rgba(31,31,31,1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 8rem;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
     -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, transparent), to(#0005));

@@ -20,6 +20,7 @@ export const DayliSection = styled.section`
     grid-template-rows: 3fr 1fr;
     grid-template-columns: 100%;
     overflow: hidden;
+    background-color: rgba(31,31,31,1);
 `;
 
 export const Loading = styled.div`

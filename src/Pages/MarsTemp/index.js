@@ -36,11 +36,11 @@ function renderCurrentSol(currentSol, currentDate, allData) {
   )
 }
 
-export const MarsTemp = observer(({ marsData: { fetchData, currentSol, currentDate, allData, solKeys } }) => {
-  const [imageVisible, setImageVisible] = useState(false);
+export const MarsTemp = observer(({ marsData:
+  { fetchData, currentSol, currentDate, allData, solKeys }, isImageLoad, image }) => {
+  
   console.log('render MARS', currentSol, currentDate);
   useEffect(() => {
-    loadImage(setImageVisible);
     fetchData();
   }, []);
   const memoizedSolCards = useMemo(() => renderSolsCards(solKeys, allData), [solKeys]);
@@ -49,9 +49,9 @@ export const MarsTemp = observer(({ marsData: { fetchData, currentSol, currentDa
   return (
     <S.Wrapper>
       <S.BgImageWrapper>
-       {imageVisible &&
+       {isImageLoad &&
           <S.BgImage
-          src={IMAGE_URL}
+          src={image}
         />
        }
       </S.BgImageWrapper>
@@ -79,14 +79,3 @@ export const MarsTemp = observer(({ marsData: { fetchData, currentSol, currentDa
     </S.Wrapper>
   )
 });
-
-function loadImage(callback) {
-   const img = new Image();
-      img.src = IMAGE_URL;
-      img.onload = () => {
-        callback(true)
-      }
-      img.onerror = () => {
-        callback(false)
-      }
-}

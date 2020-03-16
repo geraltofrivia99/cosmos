@@ -22,7 +22,8 @@ export class DailyStore {
       const lastDay = this.daysData[this.daysData.length - 1];
       const cD = lastDay ? new Date(lastDay) : new Date();
       cD.setDate(cD.getDate() - i);
-      res.push(new Date(cD.getTime() - (cD.getTimezoneOffset() * 60000 )).toISOString().split("T")[0]);
+      const nD = new Date(cD.getTime() - (cD.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
+      res.push(nD);
       i++;
     }
     this.daysData = this.daysData.concat(res);
@@ -30,7 +31,7 @@ export class DailyStore {
   }
 
   fetchFunc = async (array) => {
-    await Promise.all(array.map((date, i) => 
+    await Promise.all(array.map((date, i) =>
       fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${API_KEY}`)
         .then(resp => resp.json())
         .then((data) => this.addfullDaysData(data, i))
@@ -69,6 +70,7 @@ decorate(DailyStore, {
   // daysData: observable,
   loadedImages: observable,
   fullDaysData: observable,
+  fullDaysDataMap: observable,
   renderSlides: observable,
   addPrevDays: action,
   fetchFunc: action,

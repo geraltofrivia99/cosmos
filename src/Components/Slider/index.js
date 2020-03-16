@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Carousel from 'nuka-carousel';
 import { observer } from "mobx-react";
+import { DotsLoader } from '../DotsLoader'
 
 
 import * as S from './styled';
@@ -8,7 +9,7 @@ import * as S from './styled';
 
 export const SliderComponent = observer(({ data, cfg, setLoadedSlides }) => {
   // console.log('render COMPONENT SLIDER', data, cfg, setLoadedSlides);
-  const renderSlides = data => data.map((cur, i) => {
+  const renderSlides = () => data.map((cur, i) => {
     const setLoaded = (value) => {
       setLoadedSlides(i, value);
     }
@@ -20,23 +21,26 @@ export const SliderComponent = observer(({ data, cfg, setLoadedSlides }) => {
       activeIndex={cfg.slideIndex}
     />
   })
+  // const renderSlidesMemo = useMemo(() => renderSlides(), [data.length])
   return (
     <S.SliderWrapper>
       <Carousel {...cfg}>
-      {renderSlides(data)}
+      {renderSlides()}
       </Carousel>
     </S.SliderWrapper>
   )
 });
 
 const Slide = React.memo(({data, setLoaded, activeIndex, index}) => {
+  const [isLoadData, setLoad] = useState({ isLoad: false, isFinishLoad: false });
   return (
     <S.Slide style={{ display: setDisplay(activeIndex, index) ? 'block' : 'none' }}>
-      <S.Image
+      {isLoadData.isLoad ? <S.Image
         src={data.url}
         alt=""
-        onLoad={() => setLoaded(true)}
-      />
+        onLoad={() => setLoad({ isLoad: true, isFinishLoad: true })}
+        onError={() => setLoad({ isLoad: false, isFinishLoad: true })}
+      /> : <DotsLoader />}
     </S.Slide>
   )
 });

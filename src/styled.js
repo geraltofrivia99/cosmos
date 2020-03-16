@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  
+`;
+
 export const ScrollControls = styled.div`
   display: inline-flex;
   flex-direction: column;
