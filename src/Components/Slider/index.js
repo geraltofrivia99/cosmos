@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from 'nuka-carousel';
 import { observer } from "mobx-react";
-import { DotsLoader } from '../DotsLoader'
-
+// import { DotsLoader } from '../DotsLoader'
+import { Placeholder } from '../Placeholder';
 
 import * as S from './styled';
 
@@ -33,14 +33,24 @@ export const SliderComponent = observer(({ data, cfg, setLoadedSlides }) => {
 
 const Slide = React.memo(({data, setLoaded, activeIndex, index}) => {
   const [isLoadData, setLoad] = useState({ isLoad: false, isFinishLoad: false });
+  useEffect(() => {
+    const img = new Image();
+    img.src = data.url;
+    img.onload = () => {
+      setLoad({ isLoad: true, isFinishLoad: true });
+    }
+    img.onerror = () => {
+      setLoad({ isLoad: false, isFinishLoad: true });
+    }
+  }, [])
   return (
     <S.Slide style={{ display: setDisplay(activeIndex, index) ? 'block' : 'none' }}>
-      {isLoadData.isLoad ? <S.Image
+      {!isLoadData.isLoad && (activeIndex === index || activeIndex + 1 === index)  ? 
+      <Placeholder /> :
+      <S.Image
         src={data.url}
         alt=""
-        onLoad={() => setLoad({ isLoad: true, isFinishLoad: true })}
-        onError={() => setLoad({ isLoad: false, isFinishLoad: true })}
-      /> : <DotsLoader />}
+      />}
     </S.Slide>
   )
 });
