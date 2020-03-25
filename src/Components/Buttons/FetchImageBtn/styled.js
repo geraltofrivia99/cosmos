@@ -50,3 +50,13 @@ export const Btn = styled.button`
     transition-delay: 0.3s;
   }
 `;
+
+export const Link = styled.a`
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(31, 31, 31, .2);
+  outline: none !important;
+  text-decoration: none;
+  background: transparent;
+`;

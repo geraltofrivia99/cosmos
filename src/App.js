@@ -61,8 +61,8 @@ export const App = observer(({ store }) => {
   return (
     <S.Container onWheel={onWheel}>
       <S.ScrollControls>
-          <div onClick={scrollToDayli}><span /><p>Go to Dayli</p></div>
-          <div onClick={scrollToMars}><span /><p>Go to Mars</p></div>
+          <div onClick={scrollToDayli}><span /><p>APOD</p></div>
+          <div onClick={scrollToMars}><span /><p>Mars Insight</p></div>
       </S.ScrollControls>
       {renderDayli()}
       {renderMars()}

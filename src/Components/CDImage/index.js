@@ -26,11 +26,12 @@ export const CDImage = observer(({
                 onError={() => {console.log('onError')}}
                 // decode={false}
             />
-            {!isHdImageLoad && opacity &&
-                <S.LoadingHd>
-                    <FetchImageButton />
-                    {/* <DotsLoader><span></span></DotsLoader> */}
-                </S.LoadingHd>}
         </S.ImageWrapper>
     )
 })
+
+// {!isHdImageLoad && opacity &&
+//     <S.LoadingHd>
+//         <FetchImageButton url={hdImage} />
+//         {/* <DotsLoader><span></span></DotsLoader> */}
+//     </S.LoadingHd>}

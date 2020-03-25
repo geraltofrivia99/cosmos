@@ -28,7 +28,7 @@ export const ScrollControls = styled.div`
   & div {
     color: #f1f1f1;
     display: inline-flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     font-size: 0.6rem;
     &:hover {
