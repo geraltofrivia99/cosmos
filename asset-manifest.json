@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/cosmos/static/css/main.6b0b8506.chunk.css",
+    "main.js": "/cosmos/static/js/main.000612fb.chunk.js",
+    "main.js.map": "/cosmos/static/js/main.000612fb.chunk.js.map",
+    "runtime-main.js": "/cosmos/static/js/runtime-main.c85a3727.js",
+    "runtime-main.js.map": "/cosmos/static/js/runtime-main.c85a3727.js.map",
+    "static/css/2.512b24b6.chunk.css": "/cosmos/static/css/2.512b24b6.chunk.css",
+    "static/js/2.4e8b1752.chunk.js": "/cosmos/static/js/2.4e8b1752.chunk.js",
+    "static/js/2.4e8b1752.chunk.js.map": "/cosmos/static/js/2.4e8b1752.chunk.js.map",
+    "index.html": "/cosmos/index.html",
+    "precache-manifest.4fb5ad8fff1ab47527a3246ced247a75.js": "/cosmos/precache-manifest.4fb5ad8fff1ab47527a3246ced247a75.js",
+    "service-worker.js": "/cosmos/service-worker.js",
+    "static/css/2.512b24b6.chunk.css.map": "/cosmos/static/css/2.512b24b6.chunk.css.map",
+    "static/css/main.6b0b8506.chunk.css.map": "/cosmos/static/css/main.6b0b8506.chunk.css.map",
+    "static/js/2.4e8b1752.chunk.js.LICENSE": "/cosmos/static/js/2.4e8b1752.chunk.js.LICENSE",
+    "static/media/mars.jpg": "/cosmos/static/media/mars.c2c7784f.jpg",
+    "static/media/slick-theme.css": "/cosmos/static/media/slick.f97e3bbf.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c85a3727.js",
+    "static/css/2.512b24b6.chunk.css",
+    "static/js/2.4e8b1752.chunk.js",
+    "static/css/main.6b0b8506.chunk.css",
+    "static/js/main.000612fb.chunk.js"
+  ]
+}
