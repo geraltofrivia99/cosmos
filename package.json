@@ -12,7 +12,7 @@
     "mobx": "^5.15.2",
     "mobx-react": "^6.1.4",
     "nuka-carousel": "^4.6.1",
-    "react": "0.0.0-experimental-f42431abe",
+    "react": "0.14.0",
     "react-calendar": "^2.19.2",
     "react-dom": "0.0.0-experimental-f42431abe",
     "react-image": "^2.2.2",
